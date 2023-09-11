@@ -3,11 +3,15 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include <unistd.h>
-#include <sys/types.h>
-#include <sys/stat.h>
+#include <string.h>
 #include <sys/wait.h>
-void executecmd(char **av);
-char *getloc(char *cmd);
+
+#define BUFFER_SIZE 256
+void myshell(void);
+void myfork(char *buff);
+char *mygetlinef(void);
+char *mystrtokf(char *inp);
+char *myprintf(char *argv);
+
 #endif
