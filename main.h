@@ -3,15 +3,13 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
 #include <string.h>
-#include <sys/wait.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/stat.h>
 
-#define BUFFER_SIZE 256
-void myshell(void);
-void myfork(char *buff);
-char *mygetlinef(void);
-char *mystrtokf(char *inp);
-char *myprintf(char *argv);
+int mywrite(char *str);
+void executecommand(char **args);
+char *getuserpath(char *cmd);
 
 #endif
