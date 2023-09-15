@@ -12,23 +12,24 @@ void myfork(char *buff)
 	buff[strcspn(buff, "\n")] = '\0';
 	if (strlen(buff) == 0 || strspn(buff, " \t\n") == strlen(buff))
 	{
-		myprintf("nothing was entered!\n");
+		myprintf("Error!\n");
 		exit(EXIT_SUCCESS);
 	}
 	if (strcmp(buff, "exit") == 0)
 	{
-		myprintf("Bye!\n");
+		myprintf("Exiting!\n");
 		exit(EXIT_SUCCESS);
 	}
 	id = fork();
 	if (id < 0)
 	{
-		fprintf(stderr, "Fork Failed");
+		perror("Something went wrong\n");
+		exit(EXIT_FAILURE);
 	}
 	else if (id == 0)
 	{
 		execlp(buff, buff, NULL);
-		fprintf(stderr, "Command %s not found\n", buff);
+		perror("Command not found\n");
 		exit(EXIT_FAILURE);
 	}
 	else

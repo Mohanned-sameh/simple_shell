@@ -10,11 +10,11 @@ void myshell(void)
 
 	while (1)
 	{
-		myprintf("myshell$ ");
+		myprintf("$ ");
 		inp = mygetlinef();
 		strcpy(buff, inp);
 		mystrtokf(inp);
 		myfork(inp);
-		free(inp);
 	}
+	free(inp);
 }

@@ -7,7 +7,7 @@
 char *mystrtokf(char *inp)
 {
 	char *str = inp;
-	char *delimiter = " \n";
+	char *delimiter = " ";
 	char *token;
 
 	token = strtok(str, delimiter);
