@@ -3,14 +3,15 @@
  * main - Entry point
  * @ac: argument count
  * @av: argument vector
+ * @env: environment variables
  * Return: Always 0 (Success)
  */
-int main(int ac, char **av)
+int main(int ac, char **av, char **env)
 {
 	char *userline = NULL, *userlinecopy = NULL, *token = NULL;
 	size_t length = 0;
 	ssize_t userlineread;
-	const char *delimiter = " ";
+	const char *delimiter = " \n";
 	int numoftokens = 0, i;
 
 	(void)ac;
@@ -27,6 +28,11 @@ int main(int ac, char **av)
 		{
 			mywrite("Goodbye!\n");
 			exit(0);
+		}
+		if (strcmp(userline, "env\n") == 0)
+		{
+			print_environment_variables(env);
+			continue;
 		}
 		userlinecopy = malloc(sizeof(char) * userlineread);
 		if (userlinecopy == NULL)
