@@ -22,7 +22,7 @@ void executecommand(char **args)
 		{
 			if (execve(realcmd, args, NULL) == -1)
 			{
-				mywrite("command not found\n");
+				perror("command not found\n");
 				exit(1);
 			}
 		}

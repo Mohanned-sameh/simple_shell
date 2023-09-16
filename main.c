@@ -20,7 +20,7 @@ int main(int ac, char **av)
 		userlineread = getline(&userline, &length, stdin);
 		if (userlineread == -1)
 		{
-			mywrite("Exiting bye!\n");
+			perror("Exiting bye!\n");
 			return (-1);
 		}
 		if (strcmp(userline, "exit\n") == 0)
@@ -31,7 +31,7 @@ int main(int ac, char **av)
 		userlinecopy = malloc(sizeof(char) * userlineread);
 		if (userlinecopy == NULL)
 		{
-			mywrite("Error: Memory allocation failed!\n");
+			perror("Error: Memory allocation failed!\n");
 			return (-1);
 		}
 		strcpy(userlinecopy, userline);
