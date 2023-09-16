@@ -13,6 +13,6 @@ void executecommand(char **args)
 		cmd = args[0];
 		realcmd = getuserpath(cmd);
 		if (execve(realcmd, args, NULL) == -1)
-			perror("Command not found");
+			mywrite("Command not found\n");
 	}
 }

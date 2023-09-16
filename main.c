@@ -23,10 +23,12 @@ int main(int ac, char **av)
 			mywrite("Exiting bye!\n");
 			return (-1);
 		}
+		{
+		}
 		userlinecopy = malloc(sizeof(char) * userlineread);
 		if (userlinecopy == NULL)
 		{
-			mywrite("Error: Memory allocation failed!\m");
+			mywrite("Error: Memory allocation failed!\n");
 			return (-1);
 		}
 		strcpy(userlinecopy, userline);
