@@ -21,18 +21,18 @@ int main(int ac, char **av)
 		if (userlineread == -1)
 		{
 			perror("Exiting bye!\n");
-			return (-1);
+			exit(1);
 		}
 		if (strcmp(userline, "exit\n") == 0)
 		{
 			mywrite("Goodbye!\n");
-			return (0);
+			exit(0);
 		}
 		userlinecopy = malloc(sizeof(char) * userlineread);
 		if (userlinecopy == NULL)
 		{
 			perror("Error: Memory allocation failed!\n");
-			return (-1);
+			exit(1);
 		}
 		strcpy(userlinecopy, userline);
 		token = strtok(userline, delimiter);
