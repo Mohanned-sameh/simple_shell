@@ -6,13 +6,13 @@
  */
 void executecommand(char **args)
 {
-	char *cmd = NULL;
+	char *cmd = NULL, *realcmd = NULL;
 
 	if (args)
 	{
 		cmd = args[0];
-
-		if (execve(cmd, args, NULL) == -1)
-			perror("ERROR COMMAND NOT FOUND!");
+		realcmd = getuserpath(cmd);
+		if (execve(realcmd, args, NULL) == -1)
+			perror("Command not found");
 	}
 }

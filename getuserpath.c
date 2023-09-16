@@ -6,40 +6,38 @@
  */
 char *getuserpath(char *cmd)
 {
-	char *path = NULL, *copyofpath = NULL, *filepathex = NULL;
-	int len = 0, dirlength;
-	char *tokenofpath;
+	char *userpath, *userpathcopy, *tokenofpath, *pathoffile;
+	int cmdlength, dirlength;
 	struct stat st;
 
-	path = getenv("PATH");
-	if (path)
+	userpath = getenv("PATH");
+	if (userpath)
 	{
-		copyofpath = strdup(path);
-		len = strlen(cmd);
-		tokenofpath = strtok(copyofpath, ":");
+		userpathcopy = strdup(userpath);
+		cmdlength = strlen(cmd);
+		tokenofpath = strtok(userpathcopy, ":");
 		while (tokenofpath != NULL)
 		{
 			dirlength = strlen(tokenofpath);
-			filepathex = malloc(sizeof(char) * (dirlength + len + 2));
-			strcpy(filepathex, tokenofpath);
-			strcat(filepathex, "/");
-			strcat(filepathex, cmd);
-			strcat(filepathex, "\0");
-			if (stat(filepathex, &st) == 0)
+			pathoffile = malloc(sizeof(char) * (dirlength + cmdlength + 2));
+			strcpy(pathoffile, tokenofpath);
+			strcat(pathoffile, "/");
+			strcat(pathoffile, cmd);
+			strcat(pathoffile, "\0");
+			if (stat(pathoffile, &st) == 0)
 			{
-				free(copyofpath);
-				return (filepathex);
+				free(userpathcopy);
+				return (pathoffile);
 			}
 			else
 			{
-				free(filepathex);
+				free(pathoffile);
 				tokenofpath = strtok(NULL, ":");
 			}
 		}
-		free(copyofpath);
+		free(userpathcopy);
 		if (stat(cmd, &st) == 0)
 			return (cmd);
-
 		return (NULL);
 	}
 	return (NULL);

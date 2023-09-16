@@ -7,50 +7,48 @@
  */
 int main(int ac, char **av)
 {
-	char *userline = NULL, *newuserline = NULL;
-	size_t len = 0;
-	ssize_t userlinesread;
-	const char *delim = " \n";
+	char *userline = NULL, *userlinecopy = NULL, *token = NULL;
+	size_t length = 0;
+	ssize_t userlineread;
+	const char *delimiter = " \n";
 	int numoftokens = 0, i;
-	char *token;
 
 	(void)ac;
 	while (1)
 	{
 		mywrite("$ ");
-		userlinesread = getline(&userline, &len, stdin);
-		if (userlinesread == -1)
+		userlineread = getline(&userline, &length, stdin);
+		if (userlineread == -1)
 		{
-			perror("Error: exiting shell now\n");
-			exit(EXIT_SUCCESS);
+			mywrite("Exiting bye!");
+			return (-1);
 		}
-		newuserline = malloc(sizeof(char) * userlinesread);
-		if (newuserline == NULL)
+		userlinecopy = malloc(sizeof(char) * userlineread);
+		if (userlinecopy == NULL)
 		{
-			perror("Error: Memory allocation failed\n");
-			exit(EXIT_FAILURE);
+			mywrite("Error: Memory allocation failed!");
+			return (-1);
 		}
-		strcpy(newuserline, userline);
-		token = strtok(newuserline, delim);
+		strcpy(userlinecopy, userline);
+		token = strtok(userline, delimiter);
 		while (token != NULL)
 		{
 			numoftokens++;
-			token = strtok(NULL, delim);
+			token = strtok(NULL, delimiter);
 		}
 		numoftokens++;
 		av = malloc(sizeof(char *) * numoftokens);
-		token = strtok(newuserline, delim);
+		token = strtok(userlinecopy, delimiter);
 		for (i = 0; token != NULL; i++)
 		{
 			av[i] = malloc(sizeof(char) * strlen(token));
 			strcpy(av[i], token);
-			token = strtok(NULL, delim);
+			token = strtok(NULL, delimiter);
 		}
 		av[i] = NULL;
 		executecommand(av);
 	}
-	free(newuserline);
+	free(userlinecopy);
 	free(userline);
-
 	return (0);
 }
