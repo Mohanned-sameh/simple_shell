@@ -10,7 +10,7 @@ int main(int ac, char **av)
 	char *userline = NULL, *userlinecopy = NULL, *token = NULL;
 	size_t length = 0;
 	ssize_t userlineread;
-	const char *delimiter = " \n";
+	const char *delimiter = " ";
 	int numoftokens = 0, i;
 
 	(void)ac;
