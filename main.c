@@ -23,7 +23,10 @@ int main(int ac, char **av)
 			mywrite("Exiting bye!\n");
 			return (-1);
 		}
+		if (strcmp(userline, "exit\n") == 0)
 		{
+			mywrite("Goodbye!\n");
+			return (0);
 		}
 		userlinecopy = malloc(sizeof(char) * userlineread);
 		if (userlinecopy == NULL)
