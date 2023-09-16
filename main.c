@@ -20,13 +20,13 @@ int main(int ac, char **av)
 		userlineread = getline(&userline, &length, stdin);
 		if (userlineread == -1)
 		{
-			mywrite("Exiting bye!");
+			mywrite("Exiting bye!\n");
 			return (-1);
 		}
 		userlinecopy = malloc(sizeof(char) * userlineread);
 		if (userlinecopy == NULL)
 		{
-			mywrite("Error: Memory allocation failed!");
+			mywrite("Error: Memory allocation failed!\m");
 			return (-1);
 		}
 		strcpy(userlinecopy, userline);
