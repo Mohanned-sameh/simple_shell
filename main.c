@@ -47,7 +47,7 @@ void handletext(ssize_t text)
 {
 	if (text == -1)
 	{
-		perror("Error");
+		perror("Error\n");
 		exit(1);
 	}
 }

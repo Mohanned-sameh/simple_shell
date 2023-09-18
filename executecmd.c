@@ -21,7 +21,7 @@ void executecmd(char **args)
 		childid = fork();
 		if (childid == -1)
 		{
-			perror("Fork failed");
+			perror("Fork failed\n");
 			exit(1);
 		}
 		if (actualcmd)
@@ -30,7 +30,7 @@ void executecmd(char **args)
 			{
 				if (execve(actualcmd, args, NULL) == -1)
 				{
-					perror("Error");
+					perror("Error\n");
 					exit(1);
 				}
 			}
