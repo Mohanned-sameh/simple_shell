@@ -23,6 +23,7 @@ void executecommand(char **args)
 			if (execve(realcmd, args, NULL) == -1)
 			{
 				perror("command not found\n");
+				exit(1);
 			}
 		}
 		else

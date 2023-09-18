@@ -13,5 +13,6 @@ int mywrite(char *str);
 void executecommand(char **args);
 char *getuserpath(char *cmd);
 void print_environment_variables(char **environ);
+void checktext(char *text, char **env, ssize_t userlineread);
 
 #endif

@@ -8,10 +8,10 @@
  */
 int main(int ac, char **av, char **env)
 {
-	char *userline = NULL, *userlinecopy = NULL, *token = NULL;
+	char *userline = NULL, *userlinecopy = NULL, *token = NULL,
+		 *delimiter = " \n";
 	size_t length = 0;
 	ssize_t userlineread;
-	const char *delimiter = " \n";
 	int numoftokens = 0, i;
 
 	(void)ac;
@@ -19,27 +19,8 @@ int main(int ac, char **av, char **env)
 	{
 		mywrite("$ ");
 		userlineread = getline(&userline, &length, stdin);
-		if (userlineread == -1)
-		{
-			perror("Exiting bye!\n");
-			exit(1);
-		}
-		if (strcmp(userline, "exit\n") == 0)
-		{
-			mywrite("Goodbye!\n");
-			exit(0);
-		}
-		if (strcmp(userline, "env\n") == 0)
-		{
-			print_environment_variables(env);
-			continue;
-		}
 		userlinecopy = malloc(sizeof(char) * userlineread);
-		if (userlinecopy == NULL)
-		{
-			perror("Error: Memory allocation failed!\n");
-			exit(1);
-		}
+		checktext(userline, env, userlineread);
 		strcpy(userlinecopy, userline);
 		token = strtok(userline, delimiter);
 		while (token != NULL)
@@ -62,4 +43,29 @@ int main(int ac, char **av, char **env)
 	free(userlinecopy);
 	free(userline);
 	return (0);
+}
+/**
+ * checktext - checks if the user input is valid
+ * @text: user input
+ * @env: environment variables
+ * @userlineread: number of bytes read from stdin
+ * Return: nothing
+ */
+void checktext(char *text, char **env, ssize_t userlineread)
+{
+
+	if (userlineread == -1)
+	{
+		perror("Error: Unable to read from stdin\n");
+		exit(1);
+	}
+	if (strcmp(text, "exit\n") == 0)
+	{
+		mywrite("Goodbye!\n");
+		exit(1);
+	}
+	if (strcmp(text, "env\n") == 0)
+	{
+		print_environment_variables(env);
+	}
 }
