@@ -19,7 +19,7 @@ char *getuserpath(char *cmd)
 		while (tokenofpath != NULL)
 		{
 			dirlength = strlen(tokenofpath);
-			pathoffile = malloc(sizeof(char) * (dirlength + cmdlength + 2));
+			pathoffile = malloc(dirlength + cmdlength + 2);
 			strcpy(pathoffile, tokenofpath);
 			strcat(pathoffile, "/");
 			strcat(pathoffile, cmd);
