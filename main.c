@@ -11,7 +11,6 @@ int main(int ac, char **av, char **env)
 	char *line = NULL, *linecopy = malloc(sizeof(char) * 1024);
 	ssize_t read = 0;
 	size_t len = 0;
-	int i;
 
 	myprint("$ ");
 	(void)ac;
@@ -22,14 +21,7 @@ int main(int ac, char **av, char **env)
 			exit(0);
 		strcpy(linecopy, line);
 		av = wordsarray(linecopy, " ");
-		for (i = 0; av[i] != NULL; i++)
-		{
-			if (strcmp(av[i], "exit") == 0)
-				exit(0);
-			else if (strcmp(av[i], "env") == 0)
-				printenv(env);
-		}
-		execute(av);
+		execute(av, env);
 		free(av);
 		av = NULL;
 		myprint("$ ");

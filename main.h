@@ -12,7 +12,7 @@ int myprint(char *str);
 size_t token(char *str, char *delim);
 char **wordsarray(char *str, char *delim);
 void printenv(char **env);
-void execute(char **args);
+void execute(char **args, char **env);
 char *getpath(char *cmd);
 
 #endif
