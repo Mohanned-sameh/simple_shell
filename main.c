@@ -13,10 +13,10 @@ int main(int ac, char **av, char **env)
 	size_t len = 0;
 	int i;
 
+	myprint("$ ");
 	(void)ac;
 	while (1)
 	{
-		myprint("$ ");
 		read = getline(&line, &len, stdin);
 		if (read == -1)
 			exit(EXIT_SUCCESS);
@@ -38,6 +38,7 @@ int main(int ac, char **av, char **env)
 		execute(av);
 		free(av);
 		av = NULL;
+		myprint("$ ");
 	}
 	free(line);
 	free(linecopy);
