@@ -1,53 +1,45 @@
 #include "main.h"
 /**
  * main - entry point
+ * @ac: argument count
+ * @av: argument vector
+ * @env: environment
  * Return: 0
  */
 int main(int ac, char **av, char **env)
 {
-	char *userlines = NULL;
+	char *line = NULL, *linecopy = malloc(sizeof(char) * 1024);
+	ssize_t read = 0;
 	size_t len = 0;
-	ssize_t userlinesread;
-	char *tokens[MAX_TOKENS];
-	int numoftokens;
+	int i;
 
 	(void)ac;
-	(void)av;
 	while (1)
 	{
 		myprint("$ ");
-		userlinesread = getline(&userlines, &len, stdin);
-		handletext(userlinesread);
-		numoftokens = 0;
-		tokens[numoftokens] = strtok(userlines, " \n");
-		if (strcmp(tokens[0], "env") == 0)
+		read = getline(&line, &len, stdin);
+		if (read == -1)
+			exit(EXIT_SUCCESS);
+		strcpy(linecopy, line);
+		av = wordsarray(linecopy, " ");
+		for (i = 0; av[i] != NULL; i++)
 		{
-			myprintenv(env);
+			if (strcmp(av[i], "exit") == 0)
+			{
+				free(line);
+				free(linecopy);
+				exit(EXIT_SUCCESS);
+			}
+			else if (strcmp(av[i], "env") == 0)
+			{
+				printenv(env);
+			}
 		}
-		while (tokens[numoftokens] != NULL && numoftokens < MAX_TOKENS - 1)
-		{
-			numoftokens++;
-			tokens[numoftokens] = strtok(NULL, " \n");
-		}
-		tokens[numoftokens] = NULL;
-		if (numoftokens > 0)
-		{
-			executecmd(tokens);
-		}
+		execute(av);
+		free(av);
+		av = NULL;
 	}
-
-	free(userlines);
+	free(line);
+	free(linecopy);
 	return (0);
-}
-/**
- * handletext - handles text
- * @text: text
- */
-void handletext(ssize_t text)
-{
-	if (text == -1)
-	{
-		perror("Error\n");
-		exit(1);
-	}
 }
