@@ -7,23 +7,20 @@
  */
 char **wordsarray(char *str, char *delim)
 {
-	char **av = NULL, prevcharacter = '\0';
-	size_t s_size = strlen(str);
-	size_t size = token(str, delim);
-	size_t i;
-	int k = 0;
+	char **av = NULL, prevchar = '\0';
+	size_t strsize = strlen(str), i;
+	size_t arrsize = token(str, delim);
+	int j = 0;
 
-	av = malloc(sizeof(char *) * (size + 1));
-
-	for (i = 0; i <= s_size; i++)
+	av = malloc(sizeof(char *) * (arrsize + 1));
+	for (i = 0; i < strsize; i++)
 	{
-		if (str[i] != '\0' && prevcharacter == '\0')
+		if (str[i] != '\0' && prevchar == '\0')
 		{
-			av[k] = &str[i];
-			k++;
+			av[i] = str + i, j++;
 		}
-		prevcharacter = str[i];
+		prevchar = str[i];
+		av[j] = NULL;
 	}
-	av[k] = NULL;
 	return (av);
 }

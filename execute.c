@@ -13,9 +13,9 @@ void execute(char **args, char **env)
 
 	if (args[0] == NULL)
 		return;
-	if (strcmp(args[0], "exit") == 0)
+	if (mystrcmp(args[0], "exit") == 0)
 		exit(0);
-	if (strcmp(args[0], "env") == 0)
+	if (mystrcmp(args[0], "env") == 0)
 		printenv(env);
 	pid = fork();
 	command = getpath(args[0]);

@@ -12,10 +12,10 @@ int main(int ac, char **av, char **env)
 	ssize_t read = 0;
 	size_t len = 0;
 
-	myprint("$ ");
 	(void)ac;
 	while (1)
 	{
+		myprint("$");
 		read = getline(&line, &len, stdin);
 		if (read == -1)
 			exit(0);
@@ -23,8 +23,6 @@ int main(int ac, char **av, char **env)
 		av = wordsarray(linecopy, " ");
 		execute(av, env);
 		free(av);
-		av = NULL;
-		myprint("$ ");
 	}
 	free(line);
 	free(linecopy);

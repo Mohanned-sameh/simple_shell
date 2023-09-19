@@ -14,5 +14,6 @@ char **wordsarray(char *str, char *delim);
 void printenv(char **env);
 void execute(char **args, char **env);
 char *getpath(char *cmd);
+int mystrcmp(char *str, char *str2);
 
 #endif
