@@ -8,16 +8,19 @@ void execute(char **args)
 {
 	pid_t pid;
 	int status;
+	char *command;
 
+	if (args[0] == NULL)
+		return;
 	pid = fork();
+	command = getpath(args[0]);
 	if (pid == 0)
 	{
-		if (execve(args[0], args, NULL) == -1)
+		if (execve(command, args, NULL) == -1)
 		{
 			perror("Error");
 			exit(EXIT_FAILURE);
 		}
-		exit(EXIT_SUCCESS);
 	}
 	else if (pid < 0)
 	{

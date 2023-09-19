@@ -13,5 +13,6 @@ size_t token(char *str, char *delim);
 char **wordsarray(char *str, char *delim);
 void printenv(char **env);
 void execute(char **args);
+char *getpath(char *cmd);
 
 #endif
