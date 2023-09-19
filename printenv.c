@@ -6,12 +6,9 @@
  */
 void printenv(char **env)
 {
-	int i = 0;
-
-	while (env[i] != NULL)
+	for (; *env; env++)
 	{
-		myprint(env[i]);
-		i++;
+		myprint(*env);
 		myprint("\n");
 	}
 }
