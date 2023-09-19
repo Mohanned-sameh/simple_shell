@@ -19,13 +19,13 @@ void execute(char **args)
 		if (execve(command, args, NULL) == -1)
 		{
 			perror("Error");
-			exit(EXIT_FAILURE);
+			exit(1);
 		}
 	}
 	else if (pid < 0)
 	{
 		perror("Error");
-		exit(EXIT_FAILURE);
+		exit(1);
 	}
 	else
 	{

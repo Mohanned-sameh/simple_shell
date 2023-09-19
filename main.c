@@ -19,21 +19,15 @@ int main(int ac, char **av, char **env)
 	{
 		read = getline(&line, &len, stdin);
 		if (read == -1)
-			exit(EXIT_SUCCESS);
+			exit(0);
 		strcpy(linecopy, line);
 		av = wordsarray(linecopy, " ");
 		for (i = 0; av[i] != NULL; i++)
 		{
 			if (strcmp(av[i], "exit") == 0)
-			{
-				free(line);
-				free(linecopy);
-				exit(EXIT_SUCCESS);
-			}
+				exit(0);
 			else if (strcmp(av[i], "env") == 0)
-			{
 				printenv(env);
-			}
 		}
 		execute(av);
 		free(av);
