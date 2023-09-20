@@ -42,7 +42,6 @@ void myexecute(char **args)
 			{
 				perror("Error");
 				exit(EXIT_FAILURE);
-				free(command);
 			}
 		}
 	}
