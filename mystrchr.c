@@ -7,12 +7,12 @@
  */
 char *mystrchr(char *s, int c)
 {
-    int i;
+	int i;
 
-    for (i = 0; *(s + i); i++)
-    {
-        if (*(s + i) == c)
-            return (s + i);
-    }
-    return (NULL);
+	for (i = 0; *(s + i); i++)
+	{
+		if (*(s + i) == c)
+			return (s + i);
+	}
+	return (NULL);
 }
