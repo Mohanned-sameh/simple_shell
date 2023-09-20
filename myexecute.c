@@ -1,9 +1,7 @@
 #include "main.h"
-
 /**
  * myexecute - Executes a command.
  * @args: Arguments.
- * @env: Environment.
  * Return: void
  */
 void myexecute(char **args)
