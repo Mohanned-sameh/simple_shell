@@ -10,7 +10,7 @@ char *getpath(char *command)
 	char *token, *buff = NULL;
 	size_t buff_size;
 
-	if (strncmp(command, "/bin/", 5) == 0)
+	if (mystrcmp(command, "/bin/") == 0)
 		return (strdup(command));
 	if (path == NULL || !*path)
 		return (NULL);
@@ -21,9 +21,9 @@ char *getpath(char *command)
 		buff = (char *)malloc(buff_size);
 		if (!buff || checkbuf(buff))
 			return (NULL);
-		strcpy(buff, token);
-		strcat(buff, "/");
-		strcat(buff, command);
+		mystrcpy(buff, token);
+		mystrcat(buff, "/");
+		mystrcat(buff, command);
 		if (access(buff, F_OK) == 0)
 			return (buff);
 		free(buff);

@@ -12,9 +12,12 @@
 int myprint(char *str);
 char **mytoken(char *userLine);
 void myprintenv(char **env);
-void freeargs(char **args);
 void myexecute(char **args);
+size_t mystrcspn(char *s, char *reject);
 char *getpath(char *command);
+char *mystrcat(char *s1, const char *s2);
+char *mystrcpy(char *dest, char *src);
+int mystrcmp(char *s1, char *s2);
 int checkbuf(char *buff);
 
 #endif

@@ -9,7 +9,9 @@
  */
 int main(int ac, char **av, char **env)
 {
-	char userline[1024];
+	char *userline = NULL;
+	size_t bufsize = 0;
+	ssize_t characters_read;
 	char **args;
 	int i;
 
@@ -18,12 +20,16 @@ int main(int ac, char **av, char **env)
 	while (1)
 	{
 		fflush(stdout);
-		if (fgets(userline, sizeof(userline), stdin) == NULL)
+		characters_read = getline(&userline, &bufsize, stdin);
+		if (characters_read == -1)
 			break;
-		userline[strcspn(userline, "\n")] = '\0';
-		if (strcmp(userline, "exit") == 0)
+		userline[mystrcspn(userline, "\n")] = '\0';
+		if (mystrcmp(userline, "exit") == 0)
+		{
+			free(userline);
 			exit(0);
-		if (strcmp(userline, "env") == 0)
+		}
+		if (mystrcmp(userline, "env") == 0)
 		{
 			myprintenv(env);
 			continue;
@@ -31,9 +37,13 @@ int main(int ac, char **av, char **env)
 		args = mytoken(userline);
 		if (args != NULL && args[0] != NULL)
 			myexecute(args);
+
 		for (i = 0; args[i] != NULL; i++)
 			free(args[i]);
 		free(args);
 	}
+	if (userline != NULL)
+		free(userline);
+
 	return (0);
 }
