@@ -15,12 +15,11 @@ int main(int ac, char **av, char **env)
 	(void)ac;
 	while (1)
 	{
-		myprint("$");
 		read = getline(&line, &len, stdin);
 		if (read == -1)
 			exit(0);
 		strcpy(linecopy, line);
-		av = wordsarray(linecopy, " ");
+		av = wordsarray(linecopy, " \n");
 		execute(av, env);
 		free(av);
 	}
