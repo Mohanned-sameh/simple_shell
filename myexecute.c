@@ -13,7 +13,7 @@ void myexecute(char **args)
 	if (pid == -1)
 	{
 		perror("Error");
-		exit(1);
+		exit(EXIT_FAILURE);
 	}
 	else if (pid == 0)
 	{
@@ -23,19 +23,28 @@ void myexecute(char **args)
 			if (command == NULL)
 			{
 				perror("Error");
-				exit(1);
+				exit(EXIT_FAILURE);
 			}
 
 			if (execve(command, args, NULL) == -1)
 			{
 				perror("Error");
-				exit(1);
+				exit(EXIT_FAILURE);
 			}
 		}
 	}
 	else
 	{
 		wait(&status);
+		if (WIFEXITED(status))
+		{
+			if (WEXITSTATUS(status) == 127)
+			{
+				perror("Error");
+				exit(EXIT_FAILURE);
+				free(command);
+			}
+		}
 	}
 	free(command);
 }
