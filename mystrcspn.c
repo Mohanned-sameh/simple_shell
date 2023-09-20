@@ -24,5 +24,5 @@ size_t mystrcspn(char *s, char *reject)
 			break;
 		count++;
 	}
-	return count;
+	return (count);
 }
