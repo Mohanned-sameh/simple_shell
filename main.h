@@ -14,5 +14,6 @@ char **mytoken(char *userLine);
 void myprintenv(char **env);
 void myexecute(char **args, char **env);
 char *getpath(char *command);
+int checkbuf(char *buff);
 
 #endif

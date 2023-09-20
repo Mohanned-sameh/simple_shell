@@ -8,16 +8,16 @@
  */
 void myexecute(char **args, char **env)
 {
-	char *command = getpath(args[0]);
+	char *command = NULL;
 	pid_t pid = fork();
 	int status;
 
+	command = getpath(args[0]);
 	if (command == NULL)
 	{
 		perror("Error");
 		exit(1);
 	}
-
 	if (pid == -1)
 	{
 		perror("Error");
@@ -35,4 +35,5 @@ void myexecute(char **args, char **env)
 	{
 		wait(&status);
 	}
+	free(command);
 }

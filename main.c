@@ -19,10 +19,7 @@ int main(int ac, char **av, char **env)
 	{
 		fflush(stdout);
 		if (fgets(userline, sizeof(userline), stdin) == NULL)
-		{
-			myprint("\n");
 			break;
-		}
 		userline[strcspn(userline, "\n")] = '\0';
 		if (strcmp(userline, "exit") == 0)
 			exit(0);
@@ -38,6 +35,5 @@ int main(int ac, char **av, char **env)
 			free(args[i]);
 		free(args);
 	}
-
 	return (0);
 }

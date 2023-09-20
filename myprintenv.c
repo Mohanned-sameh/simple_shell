@@ -9,7 +9,7 @@ void myprintenv(char **env)
 	while (*env != NULL)
 	{
 		myprint(*env);
-		myprint("\n");
 		env++;
+		myprint("\n");
 	}
 }
