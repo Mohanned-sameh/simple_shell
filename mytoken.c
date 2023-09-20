@@ -20,7 +20,7 @@ char **mytoken(char *userLine)
 	token = strtok(userLine, " ");
 	while (token != NULL)
 	{
-		tokens[tokencount] = strdup(token);
+		tokens[tokencount] = mystrdup(token);
 		if (tokens[tokencount] == NULL)
 		{
 			perror("Error");

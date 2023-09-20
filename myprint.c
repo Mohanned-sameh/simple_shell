@@ -7,5 +7,5 @@
  */
 int myprint(char *str)
 {
-	return (write(1, str, strlen(str)));
+	return (write(1, str, mystrlen(str)));
 }

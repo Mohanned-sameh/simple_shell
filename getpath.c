@@ -11,13 +11,13 @@ char *getpath(char *command)
 	size_t buff_size;
 
 	if (mystrcmp(command, "/bin/") == 0)
-		return (strdup(command));
+		return (mystrdup(command));
 	if (path == NULL || !*path)
 		return (NULL);
 	while ((token = strtok(path, ":")))
 	{
 		path = NULL;
-		buff_size = strlen(token) + strlen(command) + 2;
+		buff_size = mystrlen(token) + mystrlen(command) + 2;
 		buff = (char *)malloc(buff_size);
 		if (!buff || checkbuf(buff))
 			return (NULL);
