@@ -15,7 +15,6 @@ void myprintenv(char **env);
 int mystrlen(char *s);
 char *mystrchr(char *s, int c);
 void myexecute(char **args);
-char *mystrtok(char *s1, const char *delim);
 char *mystrdup(char *s);
 size_t mystrcspn(char *s, char *reject);
 char *getpath(char *command);
