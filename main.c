@@ -1,29 +1,43 @@
 #include "main.h"
+
 /**
- * main - entry point
- * @ac: argument count
- * @av: argument vector
- * @env: environment
- * Return: 0
+ * main - Entry point.
+ * @ac: Argument count.
+ * @av: Argument vector.
+ * @env: Environment.
+ * Return: 0.
  */
 int main(int ac, char **av, char **env)
 {
-	char *line = NULL, *linecopy = malloc(sizeof(char) * 1024);
-	ssize_t read = 0;
-	size_t len = 0;
+	char userline[1024];
+	char **args;
+	int i;
 
 	(void)ac;
+	(void)av;
 	while (1)
 	{
-		read = getline(&line, &len, stdin);
-		if (read == -1)
+		fflush(stdout);
+		if (fgets(userline, sizeof(userline), stdin) == NULL)
+		{
+			myprint("\n");
+			break;
+		}
+		userline[strcspn(userline, "\n")] = '\0';
+		if (strcmp(userline, "exit") == 0)
 			exit(0);
-		strcpy(linecopy, line);
-		av = wordsarray(linecopy, " \n");
-		execute(av, env);
-		free(av);
+		if (strcmp(userline, "env") == 0)
+		{
+			myprintenv(env);
+			continue;
+		}
+		args = mytoken(userline);
+		if (args != NULL && args[0] != NULL)
+			myexecute(args, env);
+		for (i = 0; args != NULL && args[i] != NULL; i++)
+			free(args[i]);
+		free(args);
 	}
-	free(line);
-	free(linecopy);
+
 	return (0);
 }

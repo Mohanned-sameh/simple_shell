@@ -1,44 +1,41 @@
 #include "main.h"
 /**
  * getpath - gets the path of the executable
- * @cmd: command to execute
+ * @command: command to execute
  * Return: path of the executable
  */
-char *getpath(char *cmd)
+char *getpath(char *command)
 {
-	char *path, *copyofpath, *pathoffile, *tokenofpath;
-	int cmdlen, dirlen;
-	struct stat st;
+	char *path = getenv("PATH");
+	char *copyofpath, *token, *buff;
 
-	path = getenv("PATH");
-
-	if (path)
-	{
-		copyofpath = strdup(path);
-		cmdlen = strlen(cmd);
-		tokenofpath = strtok(copyofpath, ":");
-		while (tokenofpath)
-		{
-			dirlen = strlen(tokenofpath);
-			pathoffile = malloc(sizeof(char) * (dirlen + cmdlen + 2));
-			strcpy(pathoffile, tokenofpath);
-			strcat(pathoffile, "/");
-			strcat(pathoffile, cmd);
-			if (stat(pathoffile, &st) == 0)
-			{
-				free(copyofpath);
-				return (pathoffile);
-			}
-			else
-			{
-				free(pathoffile);
-				tokenofpath = strtok(NULL, ":");
-			}
-		}
-		free(copyofpath);
-		if (stat(cmd, &st) == 0)
-			return (cmd);
+	if (path == NULL)
 		return (NULL);
+	copyofpath = strdup(path);
+	if (copyofpath == NULL)
+	{
+		perror("strdup");
+		exit(1);
 	}
+	buff = malloc(strlen(copyofpath) + strlen(command) + 2);
+	if (buff == NULL)
+	{
+		perror("malloc");
+		exit(1);
+	}
+	token = strtok(copyofpath, ":");
+	while (token != NULL)
+	{
+		strcpy(buff, token);
+		strcat(buff, "/");
+		strcat(buff, command);
+		if (access(buff, F_OK) == 0)
+		{
+			free(copyofpath);
+			return (strdup(buff));
+		}
+		token = strtok(NULL, ":");
+	}
+	free(copyofpath);
 	return (NULL);
 }

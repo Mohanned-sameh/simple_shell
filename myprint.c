@@ -1,8 +1,9 @@
 #include "main.h"
+
 /**
- * myprint - prints to stdout
- * @str: string to print
- * Return: void
+ * myprint - Prints to stdout.
+ * @str: String to print.
+ * Return: 0.
  */
 int myprint(char *str)
 {
