@@ -30,10 +30,19 @@ int main(int ac, char **av, char **env)
 		}
 		args = mytoken(userline);
 		if (args != NULL && args[0] != NULL)
-			myexecute(args, env);
-		for (i = 0; args != NULL && args[i] != NULL; i++)
-			free(args[i]);
-		free(args);
+			myexecute(args);
+		freeargs(args);
 	}
 	return (0);
+}
+/**
+ * freeargs - free args.
+ * @args: args.
+ * Return: void
+ */
+void freeargs(char **args)
+{
+	for (int i = 0; args[i] != NULL; i++)
+		free(args[i]);
+	free(args);
 }
